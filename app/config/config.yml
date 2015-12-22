@@ -410,36 +410,6 @@ nelmio_security:
     # prevents inline scripts, unsafe eval, external scripts/images/styles/frames, etc
     csp:
         report_logger_service: monolog.logger.security
-        report:
-            report-uri: [/nelmio/csp/report]
-            default-src: [ 'self' ]
-            # There's no flash on our site
-            object-src:
-                - 'none'
-            script-src:
-                - 'https://connect.facebook.net/'
-                - 'http://connect.facebook.net/'
-                - 'http://www.google-analytics.com/'
-                - 'https://www.google-analytics.com/'
-                - 'http://browser-update.org/'
-                - 'https://www.google.com/'
-                - 'unsafe-inline'
-                - 'unsafe-eval'
-                - 'self'
-            style-src:
-                - 'https://www.google.com/'
-                - 'https://ajax.googleapis.com/'
-                - 'unsafe-inline'
-                - 'self'
-            font-src:
-                - 'https://themes.googleusercontent.com/'
-                - 'self'
-            img-src:
-                - '*'
-            frame-src:
-                - 'https://s-static.ak.facebook.com'
-                - 'http://static.ak.facebook.com'
-                - 'https://www.facebook.com'
         enforce:
             # see https://github.com/nelmio/NelmioSecurityBundle/issues/32
             report-uri: [/nelmio/csp/report]
@@ -451,6 +421,10 @@ nelmio_security:
                 - 'http://browser-update.org/'
                 - 'https://www.google.com/'
                 - 'https://ajax.googleapis.com/'
+                - 'https://barra.brasil.gov.br/'
+                - 'http://barra.brasil.gov.br/'
+                - 'http://analise.cultura.gov.br/'
+                - 'https://analise.cultura.gov.br/'
                 - 'unsafe-inline'
                 - 'unsafe-eval'
                 - 'self'

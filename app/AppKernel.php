@@ -58,6 +58,8 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Nelmio\SecurityBundle\NelmioSecurityBundle(),
             new MinC\IDCultura\CoreBundle\MinCIDCulturaCoreBundle(),
+            new MinC\AssetsBundle\MinCAssetsBundle(),
+            new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

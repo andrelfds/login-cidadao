@@ -16,22 +16,23 @@
         <![endif]-->
 
         <!-- Favicon -->
-        {% image '@LoginCidadaoCoreBundle/Resources/public/img/favicon.png' %}
+        {% image '@MinCAssetsBundle/Resources/public/img/favicon.png' %}
         <link href="{{ asset_url }}" rel="icon" type="image/png">
         {% endimage %}
 
         <!-- Styles -->
         {% stylesheets
-            '@LoginCidadaoCoreBundle/Resources/public/css/idcultura-styles.css'
-            '@LoginCidadaoCoreBundle/Resources/public/css/idcultura-styleAnimacao.css'
-            '@LoginCidadaoCoreBundle/Resources/public/css/idcultura-options.css'
-            '@LoginCidadaoCoreBundle/Resources/public/css/idcultura-responsive.css'
+            '@MinCAssetsBundle/Resources/public/css/bootstrap2.min.css'
+            '@MinCAssetsBundle/Resources/public/css/bootstrap-responsive.min.css'
+            '@MinCAssetsBundle/Resources/public/css/idcultura-styles.css'
+            '@MinCAssetsBundle/Resources/public/css/idcultura-styleAnimacao.css'
+            '@MinCAssetsBundle/Resources/public/css/idcultura-options.css'
+            '@MinCAssetsBundle/Resources/public/css/idcultura-responsive.css'
             '@LoginCidadaoCoreBundle/Resources/public/css/custom.recaptcha.css'
-            '@LoginCidadaoCoreBundle/Resources/public/css/font-awesome/font-awesome.css'
-            '@LoginCidadaoCoreBundle/Resources/public/css/font-awesome/font-awesome-ie7.min.css'
             filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}" />
 
         <!-- Web Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -44,24 +45,24 @@
 
         <style>
             body {
-                {% image '@LoginCidadaoCoreBundle/Resources/public/img/fundo.png' %}
+                {% image '@MinCAssetsBundle/Resources/public/img/fundo.png' %}
                 background-image: url({{ asset_url }});
                 {% endimage %}
             }
             .navbar .nav-responsive {
-                {% image '@LoginCidadaoCoreBundle/Resources/public/img/select-box.png' %}
+                {% image '@MinCAssetsBundle/Resources/public/img/select-box.png' %}
                 background-image: url({{ asset_url }}) right center no-repeat;
                 {% endimage %}
             }
 
             #logo-header {
-                {% image '@LoginCidadaoCoreBundle/Resources/public/img/logo-header-mobile.png' %}
+                {% image '@MinCAssetsBundle/Resources/public/img/logo-header-mobile.png' %}
                 background-image: url({{ asset_url }});
                 {% endimage %}
             }
 
             #background-footer {
-                {% image '@LoginCidadaoCoreBundle/Resources/public/img/background-footer.png' %}
+                {% image '@MinCAssetsBundle/Resources/public/img/background-footer.png' %}
                 background-image: url({{ asset_url }});
                 {% endimage %}
             }
@@ -84,7 +85,7 @@
         <div id="menu-topo" align="center">
             <ul id="lc-navbar-ul">
                 <li>
-                    <button id="send" class="btn acesso" value="cadastrar"><i class="icon-user"></i> Criar conta </button>
+                    <button id="send" class="btn acesso" value="cadastrar"><i class="fa fa-user"></i> Criar conta </button>
                 </li>
             </ul>
 
@@ -104,7 +105,7 @@
             <div id="ajax-form" class="container">
                 <div class="row t-container">
                     <div class="texture">
-                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/background.png' %}
+                        {% image '@MinCAssetsBundle/Resources/public/img/background.png' %}
                         <img id="logo-idcultura" src="{{ asset_url }}" alt="">
                         {% endimage %}
                     </div>
@@ -133,17 +134,17 @@
                                     <p style="color:#666">Se preferir, é possível usar os seguintes serviços para acessar ou criar sua conta:</p>
 
                                     <a class="connect twitter" href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter'}) }}">
-                                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/twitter.png' %}
+                                        {% image '@MinCAssetsBundle/Resources/public/img/twitter.png' %}
                                         <img src="{{ asset_url }}" width="90px" height="90px">
                                         {% endimage %}
                                     </a>
                                     <a class="connect google" href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}">
-                                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/google.png' %}
+                                        {% image '@MinCAssetsBundle/Resources/public/img/google.png' %}
                                         <img src="{{ asset_url }}" width="90px" height="90px">
                                         {% endimage %}
                                     </a>
                                     <a class="connect facebook" data-href="{{ path("lc_link_facebook") }}">
-                                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/facebook.png' %}
+                                        {% image '@MinCAssetsBundle/Resources/public/img/facebook.png' %}
                                         <img src="{{ asset_url }}" width="90px" height="90px">
                                         {% endimage %}
                                     </a>
@@ -167,17 +168,17 @@
                                     <p style="color:#666">Se preferir, é possível usar os seguintes serviços para acessar ou criar sua conta:</p>
 
                                     <a class="connect twitter" href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter'}) }}">
-                                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/twitter.png' %}
+                                        {% image '@MinCAssetsBundle/Resources/public/img/twitter.png' %}
                                         <img src="{{ asset_url }}" width="90px" height="90px">
                                         {% endimage %}
                                     </a>
                                     <a class="connect google" href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}">
-                                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/google.png' %}
+                                        {% image '@MinCAssetsBundle/Resources/public/img/google.png' %}
                                         <img src="{{ asset_url }}" width="90px" height="90px">
                                         {% endimage %}
                                     </a>
                                     <a class="connect facebook" data-href="{{ path("lc_link_facebook") }}">
-                                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/facebook.png' %}
+                                        {% image '@MinCAssetsBundle/Resources/public/img/facebook.png' %}
                                         <img src="{{ asset_url }}" width="90px" height="90px">
                                         {% endimage %}
                                     </a>
@@ -229,7 +230,7 @@
                     <div class="span8">
 
                         <div class="btn h-button"><a href="#ajax-form"><h3>Entrar no ID cultura</h3></a></div>
-                        {% image '@LoginCidadaoCoreBundle/Resources/public/img/devices.png' %}
+                        {% image '@MinCAssetsBundle/Resources/public/img/devices.png' %}
                         <img id="devices" src="{{ asset_url }}" alt="">
                         {% endimage %}
                     </div>
@@ -240,10 +241,10 @@
                         <div class="text-1">
                             <ul class="list-b">
                                 <!-- List Items -->
-                                <li style="color:#FFF"><i class="icon-ok"></i> Informando seu Email e uma senha;</li>
-                                <li style="color:#FFF"><i class="icon-ok"></i> Utilizando seu Login do Google;</li>
-                                <li style="color:#FFF"><i class="icon-ok"></i> Utilizando seu Login do Twitter.</li>
-                                <li style="color:#FFF"><i class="icon-ok"></i> Utilizando seu Login do Facebook;</li>
+                                <li style="color:#FFF"><i class="fa fa-check"></i> Informando seu Email e uma senha;</li>
+                                <li style="color:#FFF"><i class="fa fa-check"></i> Utilizando seu Login do Google;</li>
+                                <li style="color:#FFF"><i class="fa fa-check"></i> Utilizando seu Login do Twitter.</li>
+                                <li style="color:#FFF"><i class="fa fa-check"></i> Utilizando seu Login do Facebook;</li>
 
                             </ul>
                         </div>
@@ -321,7 +322,7 @@
                     <div class="span6">
                         <div class="logo-footer">
                             <a href="#">
-                                {% image '@LoginCidadaoCoreBundle/Resources/public/img/logo-footer.png' %}
+                                {% image '@MinCAssetsBundle/Resources/public/img/logo-footer.png' %}
                                 <img alt="" src="{{ asset_url }}">
                                 {% endimage %}
                             </a>
@@ -349,7 +350,7 @@
     -%}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts -%}
-        <script defer src="http://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+        <script defer src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 
         <script>
             window.fbAsyncInit = function () {

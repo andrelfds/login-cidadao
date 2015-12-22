@@ -1,0 +1,3 @@
+min_c_assets_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MinCAssetsBundle:Default:index }
