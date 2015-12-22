@@ -21,14 +21,14 @@ jQuery(document).ready(function($) {
 		    $('#entrar-no-sistema').fadeIn();
 		    $('#send').attr('value', 'cadastrar');
 		    $('#send').delay(200).queue(function(n) { 
-			$(this).html('<i class="icon-user"></i> Criar conta '); n();
+			$(this).html('<i class="fa fa-user"></i> Criar conta '); n();
 		    });
 		} else if ($('#send').attr('value') === 'cadastrar') {
 		    $('#registrar').fadeIn();
 		    $('#entrar-no-sistema').fadeOut();
 		    $('#send').attr('value', 'entrar');
 		    $('#send').delay(200).queue(function(n) { 
-			$(this).html('<i class="icon-user"></i> Entrar '); n();
+			$(this).html('<i class="fa fa-user"></i> Entrar '); n();
 		    });		   
 		}
 	    } else {
@@ -41,7 +41,7 @@ jQuery(document).ready(function($) {
             $('#registrar').hide();
             $('#entrar-no-sistema').show();
             $('#send').attr('value', 'cadastrar');
-            $('#send').html('<i class="icon-user"></i> Criar conta ');
+            $('#send').html('<i class="fa fa-user"></i> Criar conta ');
         } 
 
     // aumenta pagina se menu for maior que conteudo
