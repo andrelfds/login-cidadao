@@ -1,0 +1,55 @@
+{% extends 'LoginCidadaoCoreBundle::base.html.twig' %}
+
+{% block body %}
+
+{% block notificationExtreme %}
+{{ include("LoginCidadaoCoreBundle::notification_extreme.html.twig", { columns: 'col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3' } ) }}
+{% endblock %}
+
+<div class="row">
+    <div class="col-xs-12 text-center header-shadows">
+        <h1>ID da Cultura</h1>
+        <h2 class="slogan hidden-xs">Integrando serviços digitais.</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="general-content col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+
+        <div class="title text-center">
+            <h4>Sobre ID da Cultura</h3>
+        </div>
+
+        <div class="text">
+            <p>
+            <h2>Login integrador e gestão transparente de dados pessoais</h2>
+<h3> Um exercício em governança de Identidade digital centrada na cidadania </h3>
+
+<p>Frente ao desafio de implementar o Sistema Nacional de Informações e Indicadores Culturais - SNIIC, o qual é concebido para apoiar a realização do Plano Nacional de Cultura, principal política pública para o setor, a Secretaria de Políticas Culturais do Ministério da Cultura (SPC/MinC) deu início a uma reflexão sobre a gestão de dados pessoais por agentes públicos no ambiente digital.</p>
+
+<p>Importa ao Estado estabelecer serviços digitais que serão acessados por cidadãos por meio de interfaces que solicitam dados de identificação para o acesso, e que utilizarão estas informações de maneira transparente para o aprimoramento dos serviços prestados. Importa ao cidadão saber como os dados fornecidos serão utilizados, e ter a capacidade de gerir a visibilidade de suas informações pessoais e de sua produção cultural no âmbito dos ambientes e serviços digitais públicos.</p>
+
+<p>A experiência positiva do MinC com a plataforma CulturaDigital.br — 1ª rede social aberta lançada por um governo, que implementou os processos participativos online para a criação do Marco Civil da Internet (2009-2011) e para a consulta aberta à Lei de Direito Autoral (2010) — reforça a pertinência da estratégia de concretizar no SNIIC uma arquitetura pública para gerenciamento de identidade, capaz de articular espaços abertos de participação e fluxos de dados para aplicações e serviços digitais no campo da cultura.</p>
+
+<p>O evento <a href="http://culturadigital.br/cartografiacolaborativa">"Cultura Digital: Cartografias Colaborativas"</a>(2012) cumpriu papel de dar mais visibilidade à proposta inovadora inserida no conceito de implementação do SNIIC. Ao reunir em Brasília projetos de ponta que utilizavam interfaces colaborativas para mapeamento cultural, e apontar para a possibilidade de que tais iniciativas poderiam no futuro se conectar diretamente à base do SNIIC, tanto para input organizado de seus mapeamentos como para acesso ao conjunto de dados e referências organizados no sistema, o MinC ativou uma reflexão distribuída em importantes atores do campo da Cultura Digital.</p>
+
+<p>Em 2013, apesar do MinC ainda não contar com uma Coordenação Geral de Tecnologia da Informação (CGTI) capaz de desenvolver os aspectos inovadores do conceito de ‘Governo como Plataforma’, iniciativas alinhadas ao conceito SNIIC começaram a surgir em estados e municípios. Como exemplos tivemos o IdCult <a href="http://cultura.sc/floripa"> de Florianópolis</a>, e o <a href= "http://mapeamentofortaleza.org.br">Mapa da Cultura de Fortaleza</a>, experiência inovadora que serviu de prova de conceito das Cartografias Colaborativas aplicadas à gestão pública. </p>
+
+<p>Estava clara a demanda por um arranjo público para gerenciamento de identidade que atendesse aos desafios sofisticados que o modelo de desenvolvimento de mapas culturais distribuídos e colaborativos apresenta. Tinhamos clareza também sobre as complexas questões econômicas, políticas, e de direitos que começavam a emergir no ambiente digital, alavancadas especialmente pelo efeito das denúncias de espionagem de Edward Snowden.</p>
+
+<p>Cidadãos conectados passam a se preocupar com a privacidade de seus dados pessoais, e os serviços globais da web perdem a confiança das pessoas. Por outro lado, cresce a preocupação com serviços de redes sociais privadas que hospedam fluxos públicos de debate e mobilização social, os quais deveriam acontecer em ambientes públicos, abertos, livres de direcionamento ou censura. Qual o papel do estado frente a estas questões, a estes novos cenários?</p>
+
+<p>Foi nesse período que, inspirado na reflexão impulsionada pelo SNIIC e pelas Cartografias Colaborativas, o Gabinete Digital do gov. do Rio Grande do Sul protagonizou a mobilização técnica e política necessária para lançar o serviço <a href="https://meu.rs.gov.br">"Login Cidadão"</a>. Tal aplicação em pouco tempo demonstrou o potencial que a reflexão e a prática de politicas públicas contemporâneas sobre elementos estruturantes da infra-estrutura da rede têm na geração de insumos estratégicos para o reposicionamento do estado na era digital. Demonstra hoje considerável amadurecimento como serviço digital público.</p>
+
+<p>Este é o contexto mais amplo em que surge o "ID da Cultura". É pertinente trazer para o âmbito da Cultura o desafio de imaginar e propor um protocolo público aberto para gestão de dados pessoais na interface cidadão - poder público. Em complemento ao projeto de identidade digital desenvolvido no Ministério da Justiça, entendemos que é importante desenvolver este exercício no âmbito da cultura, com base em experiência na gestão de ambientes online para participação, projeto capaz de demonstrar uma maneira aberta, que busca utilizar elementos nativos da web para lidar com a gestão da informação de cidadãos. </p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets_custom %}
+    {% stylesheets '@lc_base_css' 'bundles/procergslogincidadaocore/css/home/*.css' filter='cssrewrite' filter='?uglifycss' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}

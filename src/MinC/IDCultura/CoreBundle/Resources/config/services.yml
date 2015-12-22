@@ -1,0 +1,4 @@
+services:
+#    min_cid_cultura_core.example:
+#        class: MinC\IDCultura\CoreBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

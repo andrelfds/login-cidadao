@@ -1,0 +1,8 @@
+{% if app.session.flashbag.peek('alert.unconfirmed.email') %}
+    {% set flashMessage = app.session.flashbag.get('alert.unconfirmed.email') | first %}
+     <div class="col-sm-12">
+         <div class="notification-extreme alert alert-danger alert-bar">
+             {{ flashMessage | raw }}
+         </div>
+     </div>
+{% endif %}
