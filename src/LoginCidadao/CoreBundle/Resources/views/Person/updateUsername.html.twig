@@ -7,55 +7,59 @@
         <h1 class="visible-xs">{%trans%}Change username{%endtrans%}</h1>
 
         {{ form_start(form, {'action': path('lc_update_username'), 'attr': {'role':'form', 'class':'lc_change_username'}}) }}
-            {{ form_errors(form) }}
-            <div class="form-content">
-    <div class="panel panel-default">
-      <div class="panel-body">
-                <div class="row clearfix">
-                    <div class="col-md-12">
-                        {{ form_row(form.username) }}
-                    </div>
-
-                    {% if emptyPassword == true %}
+        {{ form_errors(form) }}
+        <div class="form-content">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'update_username.panel_title'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <p>{{ 'update_username.purpose' | trans }}</p>
+                    <div class="row clearfix">
                         <div class="col-md-12">
-                            <h2>{% trans %}You'll need a password{% endtrans %}</h2>
-                            <p>{% trans %}To make sure that you can access the Citizen's Login even if you lose access to your Facebook or Twitter account, please define a password.{% endtrans %}</p>
+                            {{ form_row(form.username) }}
                         </div>
 
-                        <div class="col-md-12">
-                            {{ form_row(form.plainPassword.first, { 'label': 'Type in your password here:' | trans }) }}
-                        </div>
-
-                        <div class="col-md-12">
-                            {{ form_row(form.plainPassword.second, { 'label': 'And then confirm it here:' | trans }) }}
-                        </div>
-                    {% else %}
-                        <div class="col-md-12">
-                            <p>{% trans %}To confirm your change, type your current password below:{% endtrans %}</p>
-                        </div>
-                        <div class="col-md-12">
-                            {{ form_row(form.current_password, { 'label': 'Current password:' | trans }) }}
-                        </div>
-                    {% endif %}
-
-                    {% for type, messages in app.session.flashbag.all() %}
-                        {% for message in messages %}
+                        {% if emptyPassword == true %}
                             <div class="col-md-12">
-                                <div class="text-center bg-success flash-{{ type }}">
-                                    {{ message }}
-                                </div>
+                                <h2>{% trans %}You'll need a password{% endtrans %}</h2>
+                                <p>{% trans %}To make sure that you can access the Citizen's Login even if you lose access to your Facebook or Twitter account, please define a password.{% endtrans %}</p>
                             </div>
-                        {% endfor %}
-                    {% endfor %}
 
+                            <div class="col-md-12">
+                                {{ form_row(form.plainPassword.first, { 'label': 'Type in your password here:' | trans }) }}
+                            </div>
+
+                            <div class="col-md-12">
+                                {{ form_row(form.plainPassword.second, { 'label': 'And then confirm it here:' | trans }) }}
+                            </div>
+                        {% else %}
+                            <div class="col-md-12">
+                                <p>{% trans %}To confirm your change, type your current password below:{% endtrans %}</p>
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.current_password, { 'label': 'Current password:' | trans }) }}
+                            </div>
+                        {% endif %}
+
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="col-md-12">
+                                    <div class="text-center bg-success flash-{{ type }}">
+                                        {{ message }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    {{ form_widget(form.save, { 'label': 'Save' | trans, 'attr': { 'class': 'btn btn-success btn-sm' } }) }}
                 </div>
             </div>
-      <div class="panel-footer text-right">
-                {{ form_widget(form.save, { 'label': 'Save' | trans, 'attr': { 'class': 'btn btn-success btn-sm' } }) }}
-            </div>
-    </div>
 
-  </div>
+        </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}

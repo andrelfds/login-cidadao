@@ -348,3 +348,6 @@ ROLE_ORGANIZATIONS_DELETE: 'Organizations: can delete organizations where is a m
 ROLE_ORGANIZATIONS_DELETE_ANY_ORG: 'Organizations: can delete any organizations'
 ROLE_ORGANIZATIONS_MANAGE_MEMBERS_ANY_ORG: 'Organizations: can manage members of any organization'
 ROLE_ORGANIZATIONS_CAN_TRUST: 'Organizations: can flag an organization as trusted'
+update_username:
+    panel_title: Change Username
+    purpose: Your username is a form of identification that can be used when logging in, instead of typing your email or CPF.

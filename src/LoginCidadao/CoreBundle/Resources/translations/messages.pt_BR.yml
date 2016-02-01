@@ -778,3 +778,6 @@ ROLE_ORGANIZATIONS_DELETE: 'Organizações: pode excluir organizações das quai
 ROLE_ORGANIZATIONS_DELETE_ANY_ORG: 'Organizações: pode excluir quaisquer organizações'
 ROLE_ORGANIZATIONS_MANAGE_MEMBERS_ANY_ORG: 'Organizações: pode gerenciar membros de qualquer organização'
 ROLE_ORGANIZATIONS_CAN_TRUST: 'Organizações: pode marcar uma organização como confiável'
+update_username:
+    panel_title: Alterar nome de usuário
+    purpose: Seu nome de usuário é apenas uma forma de identificação que pode ser usada para fazer login em vez de digitar seu endereço de email ou CPF. Lembre-se que ainda será necessário digitar sua senha.
