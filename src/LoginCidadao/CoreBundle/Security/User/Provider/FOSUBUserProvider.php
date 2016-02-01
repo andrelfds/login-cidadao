@@ -19,7 +19,6 @@ use LoginCidadao\ValidationBundle\Validator\Constraints\UsernameValidator;
 
 class FOSUBUserProvider extends BaseClass
 {
-
     protected $proxySettings;
     protected $session;
     protected $dispatcher;
@@ -40,12 +39,12 @@ class FOSUBUserProvider extends BaseClass
                                 FactoryInterface $formFactory,
                                 array $properties, array $proxySettings = null)
     {
-        $this->userManager = $userManager;
-        $this->session = $session;
-        $this->dispatcher = $dispatcher;
-        $this->container = $container;
-        $this->formFactory = $formFactory;
-        $this->properties = $properties;
+        $this->userManager   = $userManager;
+        $this->session       = $session;
+        $this->dispatcher    = $dispatcher;
+        $this->container     = $container;
+        $this->formFactory   = $formFactory;
+        $this->properties    = $properties;
         $this->proxySettings = $proxySettings;
     }
 
@@ -59,10 +58,10 @@ class FOSUBUserProvider extends BaseClass
 
         $service = $response->getResourceOwner()->getName();
 
-        $setter = 'set' . ucfirst($service);
-        $setter_id = $setter . 'Id';
-        $setter_token = $setter . 'AccessToken';
-        $setter_username = $setter . 'Username';
+        $setter          = 'set'.ucfirst($service);
+        $setter_id       = $setter.'Id';
+        $setter_token    = $setter.'AccessToken';
+        $setter_username = $setter.'Username';
 
         if (null !== $previousUser = $this->userManager->findUserBy(array("{$service}Id" => $username))) {
             throw new AlreadyLinkedAccount();
@@ -86,18 +85,18 @@ class FOSUBUserProvider extends BaseClass
     {
         $rawResponse = $response->getResponse();
 
-        $username = $response->getUsername();
+        $username   = $response->getUsername();
         $screenName = $response->getNickname();
 
 
-        $service = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($service);
-        $setter_id = $setter . 'Id';
-        $setter_token = $setter . 'AccessToken';
-        $setter_username = $setter . 'Username';
+        $service         = $response->getResourceOwner()->getName();
+        $setter          = 'set'.ucfirst($service);
+        $setter_id       = $setter.'Id';
+        $setter_token    = $setter.'AccessToken';
+        $setter_username = $setter.'Username';
 
         $newUser = false;
-        $user = $this->userManager->findUserBy(array("{$service}Id" => $username));
+        $user    = $this->userManager->findUserBy(array("{$service}Id" => $username));
 
         if (null === $user) {
             switch ($service) {
@@ -109,18 +108,18 @@ class FOSUBUserProvider extends BaseClass
                         $this->session->remove('twitter.email');
                     }
                     $defaultUsername = "$screenName@$service";
-                break;
+                    break;
                 case 'google':
-                    $email = $rawResponse['email'];
+                    $email           = $rawResponse['email'];
                     $defaultUsername = $email;
                     break;
                 default:
-                    $email = $rawResponse['email'];
+                    $email           = $rawResponse['email'];
                     $defaultUsername = $email;
-                break;
+                    break;
             }
             $newUser = true;
-            $user = $this->userManager->createUser();
+            $user    = $this->userManager->createUser();
             $user->$setter_id($username);
             $user->$setter_token($response->getAccessToken());
             $user->$setter_username($screenName);
@@ -132,12 +131,12 @@ class FOSUBUserProvider extends BaseClass
             if (isset($fullName[1][1]) && $fullName[1][1] != '') {
                 $user->setSurname($fullName[1]);
             }
-            
+
             if (!UsernameValidator::isUsernameValid($screenName)) {
-                $screenName = UsernameValidator::getValidUsername();
+                $screenName = UsernameValidator::getValidUsername($screenName);
             }
             $availableUsername = $this->userManager->getNextAvailableUsername($screenName,
-                    10, $defaultUsername);
+                10, $defaultUsername);
             $user->setUsername($availableUsername);
             $user->setEmail($email);
             $user->setPassword('');
@@ -147,20 +146,19 @@ class FOSUBUserProvider extends BaseClass
             $form = $this->formFactory->createForm();
             $form->setData($user);
 
-            $request = $this->container->get('request');
+            $request       = $this->container->get('request');
             $eventResponse = new \Symfony\Component\HttpFoundation\RedirectResponse('/');
-            $event = new FormEvent($form, $request);
+            $event         = new FormEvent($form, $request);
             if ($newUser) {
                 $this->dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS,
-                        $event);
+                    $event);
             }
 
             $this->userManager->updateUser($user);
 
             if ($newUser) {
                 $this->dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED,
-                        new FilterUserResponseEvent($user, $request,
-                        $eventResponse));
+                    new FilterUserResponseEvent($user, $request, $eventResponse));
             }
 
             return $user;
@@ -169,11 +167,10 @@ class FOSUBUserProvider extends BaseClass
         $user = parent::loadUserByOAuthUserResponse($response);
 
         $serviceName = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
+        $setter      = 'set'.ucfirst($serviceName).'AccessToken';
 
         $user->$setter($response->getAccessToken());
 
         return $user;
     }
-
 }

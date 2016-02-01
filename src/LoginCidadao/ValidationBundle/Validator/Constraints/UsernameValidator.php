@@ -1,4 +1,5 @@
 <?php
+
 namespace LoginCidadao\ValidationBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -18,20 +19,24 @@ class UsernameValidator extends ConstraintValidator
      */
     public static function isUsernameValid($var)
     {
-        return preg_match('/^[A-Za-z0-9_.]+$/i', $var) && ($a = strlen($var)) && $a >= 1 && $a <= 33;
+        return preg_match('/^[A-Za-z0-9_.]+$/i', $var) && ($a = strlen($var)) && $a
+            >= 1 && $a <= 33;
     }
 
-    public static function getValidUsername()
+    public static function getValidUsername($invalid = null)
     {
+        if ($invalid !== null) {
+            return preg_replace('/[^A-Za-z0-9_.]/i', '_', $invalid);
+        }
         return uniqid(mt_rand(), true);
     }
 
     public function validate($value, Constraint $constraint)
     {
-        if (! isset($value) || $value === null || ! strlen(trim($value))) {
+        if (!isset($value) || $value === null || !strlen(trim($value))) {
             return;
         }
-        if (! self::isUsernameValid($value)) {
+        if (!self::isUsernameValid($value)) {
             $this->context->addViolation($constraint->message);
         }
     }
