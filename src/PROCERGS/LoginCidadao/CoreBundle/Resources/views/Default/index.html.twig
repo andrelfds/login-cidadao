@@ -4,7 +4,6 @@
     {% set form1 = lc_getForm() %}
     {% set form = lc_getFormFactory() %}
 
-
     <div class="row lc-main-title">
         <div class="col-12 text-center">
             <h1>{% trans %}Citizen's Login{% endtrans %}</h1>
@@ -12,25 +11,21 @@
         </div>
     </div>
 
-
     <div class="container lc-box-group">
 
-        <div class="row">
-            <div class="col-md-5">
-                <div class="box box-register">
+        {% embed "LoginCidadaoCoreBundle:Default:login_register.html.twig" %}
+            {% block left %}
+                <div class="box box-register hidden">
                     {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
                 </div>
-            </div>
+            {% endblock %}
 
-            <div class="col-md-2"></div>
-
-            <div class="col-md-5">
-                <div class="box">
+            {% block right %}
+                <div class="box hidden">
                     {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}
                 </div>
-            </div>
-        </div>
-
+            {% endblock %}
+        {% endembed %}
 
         {% if third_party_login is not empty %}
             <div class="row">
@@ -40,13 +35,13 @@
                         <p>{% trans %}If you prefer, it's possible to use other services to login or create your account.{% endtrans %}</p>
                         <div class="row">
                             {% if third_party_login.facebook | default(false) %}
-                                <div class="col-md-4 text-center"><a class="connect facebook" data-href="{{ path("lc_link_facebook") }}">Facebook</a></div>
+                                <div class="col-md-3 text-center"><a class="connect facebook" data-href="{{ path("lc_link_facebook") }}">Facebook</a></div>
                             {% endif %}
                             {% if third_party_login.twitter | default(false) %}
-                                <div class="col-md-4 text-center"><a class="connect twitter" href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter'}) }}">Twitter</a></div>
+                                <div class="col-md-3 text-center"><a class="connect twitter" href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter'}) }}">Twitter</a></div>
                             {% endif %}
                             {% if third_party_login.google | default(false) %}
-                                <div class="col-md-4 text-center"><a class="connect google" href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}">Google</a></div>
+                                <div class="col-md-3 text-center"><a class="connect google" href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}">Google</a></div>
                             {% endif %}
                             {% if third_party_login.nfg | default(false) %}
                                 <style scoped>
@@ -75,12 +70,50 @@
             </div>
         {% endif %}
     </div>
-
-
 {% endblock %}
 
 {% block stylesheets_custom %}
     {% stylesheets '@lc_base_css' 'bundles/logincidadaocore/css/home/*.css' filter='cssrewrite' filter='?uglifycss' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
+{% endblock %}
+
+{# A/B Testing #}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="//www.google-analytics.com/cx/api.js?experiment=BjYlFz8XQHKPDbZ8lBbEeg"></script>
+    <script>
+        // Ask Google Analytics which variation to show the user.
+        var chosenVariation = cxApi.chooseVariation();
+    </script>
+    <script>
+        var pageVariations = [
+            function () {
+                $('.box.hidden').removeClass('hidden');
+            },
+            function () {
+                var leftBox = $('.left-box').html();
+                var rightBox = $('.right-box').html();
+
+                $('.left-box').html(rightBox);
+                $('.right-box').html(leftBox);
+                $('.box.hidden').removeClass('hidden');
+            }
+        ];
+
+        $(document).ready(pageVariations[chosenVariation]);
+        $(document).ready(function () {
+            $('form').submit(function () {
+                var action;
+                if ($(this).is('[name=fos_user_registration_form]')) {
+                    action = 'create';
+                } else {
+                    action = 'login';
+                }
+
+                ga('send', 'event', 'account', action);
+            });
+        });
+    </script>
 {% endblock %}
