@@ -1,58 +1,121 @@
 {% extends 'LoginCidadaoCoreBundle::base.html.twig' %}
 
+{% block header %}
+{% endblock %}
+
 {% block body %}
     {% set form1 = lc_getForm() %}
     {% if form is not defined %}
         {% set form = lc_getFormFactory() %}
     {% endif %}
 
-    <div class="row lc-main-title hidden-xs">
-        <div class="col-12 text-center">
-            <h1>{% trans %}Citizen's Login{% endtrans %}</h1>
-            <h2>{% trans %}One account. The entire Government.{% endtrans %}</h2>
-        </div>
-    </div>
+    {% embed "LoginCidadaoCoreBundle:Default:login_register.html.twig" %}
+        {% block top %}
+            <div class="col-xs-6 visible-xs box-login">
+                <button class="show-form">{{ 'home.login' | trans }}</button>
+            </div>
+            <div class="col-xs-6 visible-xs box-register">
+                <button class="show-form">{{ 'home.register' | trans }}</button>
+            </div>
+        {% endblock %}
 
-    <div class="container lc-box-group">
+        {% block left %}
+            <div class="box box-login">
+                <button class="show-form hidden-xs">{{ 'home.login' | trans }}</button>
+                {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}
+            </div>
+        {% endblock %}
 
-        {% embed "LoginCidadaoCoreBundle:Default:login_register.html.twig" %}
-            {% block left %}
-                <div class="box box-register">
-                    {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
-                </div>
-            {% endblock %}
+        {% block right %}
+            <div class="box box-register">
+                <button class="show-form hidden-xs">{{ 'home.register' | trans }}</button>
+                {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
+            </div>
+        {% endblock %}
+    {% endembed %}
 
-            {% block right %}
-                <div class="box">
-                    {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}
-                </div>
-            {% endblock %}
-        {% endembed %}
-
-        {{ include('LoginCidadaoCoreBundle::common.3rd_party_login.html.twig') }}
-    </div>
+    {{ include('LoginCidadaoCoreBundle::common.3rd_party_login.html.twig') }}
 {% endblock %}
 
 {% block stylesheets_custom %}
     {% stylesheets '@lc_base_css' 'bundles/logincidadaocore/css/home/*.css' filter='cssrewrite' filter='?uglifycss' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
+    <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     <style type="text/css">
+        body {
+            padding-top: 20px;
+        }
+
         .lc-box .nfg {
             background-position: 2px 0;
             background-color: #EF9618;
-        {% image '@LoginCidadaoCoreBundle/Resources/public/images/meurs_connect_nfg_home.png' %}
-            background-image: url('{{ asset_url | e('css') }}');
+        {% image '@LoginCidadaoCoreBundle/Resources/public/images/meurs_connect_nfg_home.png' %} background-image: url('{{ asset_url | e('css') }}');
         {% endimage %}
         }
 
         @media (max-width: 767px) {
             .lc-box .nfg {
                 background-position: 0;
-            {% image '@LoginCidadaoCoreBundle/Resources/public/images/meurs_connect_nfg.png' %}
-                background-image: url('{{ asset_url | e('css') }}');
+            {% image '@LoginCidadaoCoreBundle/Resources/public/images/meurs_connect_nfg.png' %} background-image: url('{{ asset_url | e('css') }}');
             {% endimage %}
             }
+
+            .show-form {
+                text-indent: -9999px;
+                border-radius: 999px !important;
+                width: 120px !important;
+                height: 120px !important;
+                background-size: 100px !important;
+                background-position: center center !important;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .box-login, .box-register {
+                display: none;
+            }
+
+            .box h3 {
+                font-size: 16px;
+            }
+        }
+
+        .box-login .show-form {
+            background-position: 15px center;
+            background-size: 70px;
+            background-repeat: no-repeat;
+            background-color: #033;
+        {% image '@LoginCidadaoCoreBundle/Resources/public/images/lcrs_square_white_text.svg' %} background-image: url('{{ asset_url | e('css') }}');
+        {% endimage %}
+        }
+
+        .show-form {
+            background-color: #690;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 30px;
+            font-weight: bold;
+            color: #fff;
+            min-height: 80px;
+            padding-left: 100px;
+            text-align: left;
+        }
+
+        .box form {
+            padding: 20px;
+        }
+
+        .box form label {
+            font-size: 20px;
+        }
+
+        .box .remember-group label {
+            font-size: 14px;
+        }
+
+        #resetting_request {
+            font-size: 12px;
         }
     </style>
 {% endblock %}
@@ -60,7 +123,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('form').preventDoubleSubmission();
         });
     </script>

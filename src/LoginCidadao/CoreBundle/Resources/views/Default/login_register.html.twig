@@ -1,5 +1,9 @@
 <div class="row">
-    <div class="col-md-5 left-box">
+    {% block top %}
+    {% endblock %}
+</div>
+<div class="row">
+    <div class="col-md-5 col-sm-6 col-xs-12 left-box">
         {% block left %}
             <div class="box box-register">
                 {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
@@ -7,9 +11,7 @@
         {% endblock %}
     </div>
 
-    <div class="col-md-2"></div>
-
-    <div class="col-md-5 right-box">
+    <div class="col-md-5 col-md-offset-2 col-sm-6 col-xs-12 right-box">
         {% block right %}
             <div class="box">
                 {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}

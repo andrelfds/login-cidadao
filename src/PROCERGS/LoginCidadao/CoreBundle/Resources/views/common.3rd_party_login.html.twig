@@ -10,7 +10,7 @@
         <div class="col-md-12 text-center">
             <div class="box connect-box lc-box clearfix">
                 <h3>{% trans %}Use accounts from other services{% endtrans %}</h3>
-                <p>{% trans %}If you prefer, it's possible to use other services to login or create your account.{% endtrans %}</p>
+                <p class="hidden-sm hidden-xs">{% trans %}If you prefer, it's possible to use other services to login or create your account.{% endtrans %}</p>
                 <div class="row">
                     {% if third_party_login.facebook | default(false) %}
                         <div class="col-md-{{ columns }} text-center"><a class="connect facebook" data-href="{{ path("lc_link_facebook") }}">Facebook</a></div>
