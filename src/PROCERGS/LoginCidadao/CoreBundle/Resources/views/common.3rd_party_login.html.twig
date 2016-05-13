@@ -13,13 +13,13 @@
                 <p class="hidden-sm hidden-xs">{% trans %}If you prefer, it's possible to use other services to login or create your account.{% endtrans %}</p>
                 <div class="row">
                     {% if third_party_login.facebook | default(false) %}
-                        <div class="col-md-{{ columns }} text-center"><a class="connect facebook" data-href="{{ path("lc_link_facebook") }}">Facebook</a></div>
+                        <div class="col-xs-{{ columns }} text-center"><a class="connect facebook" data-href="{{ path("lc_link_facebook") }}" title="Facebook">Facebook</a></div>
                     {% endif %}
                     {% if third_party_login.twitter | default(false) %}
-                        <div class="col-md-{{ columns }} text-center"><a class="connect twitter" href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter'}) }}">Twitter</a></div>
+                        <div class="col-xs-{{ columns }} text-center"><a class="connect twitter" href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter'}) }}" title="Twitter">Twitter</a></div>
                     {% endif %}
                     {% if third_party_login.google | default(false) %}
-                        <div class="col-md-{{ columns }} text-center"><a class="connect google" href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}">Google</a></div>
+                        <div class="col-xs-{{ columns }} text-center"><a class="connect google" href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}" title="Google">Google</a></div>
                     {% endif %}
                     {% if third_party_login.nfg | default(false) %}
                         <style scoped>
@@ -34,13 +34,15 @@
                             @media (max-width: 767px) {
                                 .lc-box .nfg {
                                     background-position: 0;
-                                    {% image '@LoginCidadaoCoreBundle/Resources/public/images/meurs_connect_nfg.png' %}
+                                    background-color: #fff;
+                                    background-size: 45px;
+                                    {% image '@LoginCidadaoCoreBundle/Resources/public/images/lcrs_connect_nfg.png' %}
                                     background-image: url('{{ asset_url | e('css') }}');
                                     {% endimage %}
                                 }
                             }
                         </style>
-                        <div class="col-md-{{ columns }} text-center"><a class="connect nfg nfgpopup" data-href="{{ path('nfg_login') }}">NFG</a></div>
+                        <div class="col-xs-{{ columns }} text-center"><a class="connect nfg nfgpopup" data-href="{{ path('nfg_login') }}" title="Nota Fiscal Gaúcha">NFG</a></div>
                     {% endif %}
                 </div>
             </div>

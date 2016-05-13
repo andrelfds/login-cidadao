@@ -9,32 +9,37 @@
         {% set form = lc_getFormFactory() %}
     {% endif %}
 
-    {% embed "LoginCidadaoCoreBundle:Default:login_register.html.twig" %}
-        {% block top %}
-            <div class="col-xs-6 visible-xs box-login">
-                <button class="show-form">{{ 'home.login' | trans }}</button>
-            </div>
-            <div class="col-xs-6 visible-xs box-register">
-                <button class="show-form">{{ 'home.register' | trans }}</button>
-            </div>
-        {% endblock %}
+    <div class="home-wrapper">
+        {% embed "LoginCidadaoCoreBundle:Default:login_register.html.twig" %}
+            {% block top %}
+                <a href="{{ path('fos_user_security_login') }}" class="col-xs-6 visible-xs box-login btn-show-form">
+                    <button class="show-form login"></button>
+                    <span class="btn-label">{{ 'home.login' | trans }}</span>
+                </a>
+                <a href="{{ path('fos_user_registration_register') }}"
+                   class="col-xs-6 visible-xs box-register btn-show-form">
+                    <button class="show-form register"></button>
+                    <span class="btn-label register">{{ 'home.register' | trans }}</span>
+                </a>
+            {% endblock %}
 
-        {% block left %}
-            <div class="box box-login">
-                <button class="show-form hidden-xs">{{ 'home.login' | trans }}</button>
-                {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}
-            </div>
-        {% endblock %}
+            {% block left %}
+                <div class="show-form login hidden-xs btn-show-form">{{ 'home.login' | trans }}</div>
+                <div class="box box-login">
+                    {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}
+                </div>
+            {% endblock %}
 
-        {% block right %}
-            <div class="box box-register">
-                <button class="show-form hidden-xs">{{ 'home.register' | trans }}</button>
-                {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
-            </div>
-        {% endblock %}
-    {% endembed %}
+            {% block right %}
+                <div class="show-form register hidden-xs btn-show-form">{{ 'home.register' | trans }}</div>
+                <div class="box box-register">
+                    {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
+                </div>
+            {% endblock %}
+        {% endembed %}
 
-    {{ include('LoginCidadaoCoreBundle::common.3rd_party_login.html.twig') }}
+        {{ include('LoginCidadaoCoreBundle::common.3rd_party_login.html.twig') }}
+    </div>
 {% endblock %}
 
 {% block stylesheets_custom %}
@@ -61,7 +66,6 @@
             }
 
             .show-form {
-                text-indent: -9999px;
                 border-radius: 999px !important;
                 width: 120px !important;
                 height: 120px !important;
@@ -71,21 +75,87 @@
                 display: block;
             }
 
+            .show-form.register {
+                background-size: 80px !important;
+            }
+
+            .show-form + span.btn-label {
+                display: block;
+                font-size: 24px;
+                font-weight: bold;
+                text-align: center;
+                color: #000;
+                margin-top: 15px;
+            }
+
+            .show-form + span.btn-label.register {
+                color: #390;
+                font-weight: normal;
+            }
+
             .box-login, .box-register {
                 display: none;
+                padding: 0;
+                margin-bottom: 0;
             }
 
             .box h3 {
                 font-size: 16px;
             }
+
+            .lc-box {
+                margin-bottom: 0;
+            }
+
+            .home-wrapper {
+                background-color: #fff;
+                padding: 10px;
+            }
+
+            .connect {
+                text-indent: -9999px;
+                background-position: center !important;
+                height: 50px !important;
+                width: 50px !important;
+            }
+
+            .connect.facebook {
+                background-size: 45px;
+                background-position: 12px 8px !important;
+            {% image '@LoginCidadaoCoreBundle/Resources/public/images/facebook-f.svg' %}
+                background-image: url('{{ asset_url | e('css') }}');
+            {% endimage %}
+            }
+
+            .connect.twitter {
+                background-size: 45px;
+            {% image '@LoginCidadaoCoreBundle/Resources/public/images/twitter.svg' %}
+                background-image: url('{{ asset_url | e('css') }}');
+            {% endimage %}
+            }
+
+            .connect.google {
+                background-size: 50px;
+            {% image '@LoginCidadaoCoreBundle/Resources/public/images/google-plus.svg' %}
+                background-image: url('{{ asset_url | e('css') }}');
+            {% endimage %}
+            }
         }
 
-        .box-login .show-form {
+        .show-form.login {
             background-position: 15px center;
-            background-size: 70px;
+            background-size: 80px;
             background-repeat: no-repeat;
             background-color: #033;
         {% image '@LoginCidadaoCoreBundle/Resources/public/images/lcrs_square_white_text.svg' %} background-image: url('{{ asset_url | e('css') }}');
+        {% endimage %}
+        }
+
+        .show-form.register {
+            background-position: 30px center;
+            background-size: 60px;
+            background-repeat: no-repeat;
+        {% image '@LoginCidadaoCoreBundle/Resources/public/images/register.svg' %} background-image: url('{{ asset_url | e('css') }}');
         {% endimage %}
         }
 
@@ -100,10 +170,17 @@
             min-height: 80px;
             padding-left: 100px;
             text-align: left;
+            margin-bottom: 15px;
+            line-height: 80px;
+        }
+
+        .box.box-login, .box.box-register {
+            background-color: transparent;
         }
 
         .box form {
-            padding: 20px;
+            padding: 10px;
+            background-color: #F9F8F8;
         }
 
         .box form label {
@@ -117,6 +194,11 @@
         #resetting_request {
             font-size: 12px;
         }
+
+        .home-wrapper {
+            margin: 0 auto;
+            max-width: 992px;
+        }
     </style>
 {% endblock %}
 
@@ -125,6 +207,31 @@
     <script>
         $(document).ready(function () {
             $('form').preventDoubleSubmission();
+
+            $('.btn-show-form').on('click', function (event) {
+                console.log(this);
+                event.stopPropagation();
+                if ($(this).is('.box-login')) {
+                    $('.box-register').not('a').slideUp('medium', function () {
+                        $('.box-login').not('a').slideDown('medium', function () {
+                            $('.box-login form input:first').focus();
+                        });
+                    });
+                } else {
+                    $('.box-login').not('a').slideUp('medium', function () {
+                        $('.box-register').not('a').slideDown('medium', function () {
+                            $('.box-register form input:first').focus();
+                        });
+                    });
+                }
+                return false;
+            });
+
+            $(window).resize(function () {
+                if ($(window).width() >= 768) {
+                    $('.box-login,.box-register').show();
+                }
+            });
         });
     </script>
 {% endblock %}
