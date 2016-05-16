@@ -30,14 +30,14 @@
             {% endblock %}
 
             {% block left %}
-                <div class="show-form login hidden-xs btn-show-form">{{ 'home.login' | trans }}</div>
+                <div class="show-form login hidden-xs">{{ 'home.login' | trans }}</div>
                 <div class="box box-login" {{ error | default(null) != null or is_login_page ? 'style="display: block"' : '' }}>
                     {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}
                 </div>
             {% endblock %}
 
             {% block right %}
-                <div class="show-form register hidden-xs btn-show-form">{{ 'home.register' | trans }}</div>
+                <div class="show-form register hidden-xs">{{ 'home.register' | trans }}</div>
                 <div class="box box-register" {{ not form.vars.valid or is_register_page ? 'style="display: block"' : '' }}>
                     {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
                 </div>
