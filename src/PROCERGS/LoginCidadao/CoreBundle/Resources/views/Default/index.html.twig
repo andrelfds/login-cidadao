@@ -1,5 +1,12 @@
 {% extends 'LoginCidadaoCoreBundle::base.html.twig' %}
 
+{% set is_login_page = false %}
+{% set is_register_page = false %}
+{% if app.request.get('✔️') is not null %}
+    {% set is_login_page = app.request.attributes.get('_route') == 'fos_user_security_login' %}
+    {% set is_register_page = app.request.attributes.get('_route') == 'fos_user_registration_register' %}
+{% endif %}
+
 {% block header %}
 {% endblock %}
 
@@ -8,15 +15,14 @@
     {% if form is not defined %}
         {% set form = lc_getFormFactory() %}
     {% endif %}
-
     <div class="home-wrapper">
         {% embed "LoginCidadaoCoreBundle:Default:login_register.html.twig" %}
             {% block top %}
-                <a href="{{ path('fos_user_security_login') }}" class="col-xs-6 visible-xs box-login btn-show-form">
+                <a href="{{ path('fos_user_security_login', {'✔': ''}) }}" class="col-xs-6 visible-xs box-login btn-show-form">
                     <button class="show-form login"></button>
                     <span class="btn-label">{{ 'home.login' | trans }}</span>
                 </a>
-                <a href="{{ path('fos_user_registration_register') }}"
+                <a href="{{ path('fos_user_registration_register', {'✔': ''}) }}"
                    class="col-xs-6 visible-xs box-register btn-show-form">
                     <button class="show-form register"></button>
                     <span class="btn-label register">{{ 'home.register' | trans }}</span>
@@ -25,14 +31,14 @@
 
             {% block left %}
                 <div class="show-form login hidden-xs btn-show-form">{{ 'home.login' | trans }}</div>
-                <div class="box box-login">
+                <div class="box box-login" {{ error | default(null) != null or is_login_page ? 'style="display: block"' : '' }}>
                     {{ include('LoginCidadaoCoreBundle::common.login.html.twig') }}
                 </div>
             {% endblock %}
 
             {% block right %}
                 <div class="show-form register hidden-xs btn-show-form">{{ 'home.register' | trans }}</div>
-                <div class="box box-register">
+                <div class="box box-register" {{ not form.vars.valid or is_register_page ? 'style="display: block"' : '' }}>
                     {{ include('LoginCidadaoCoreBundle::common.register.html.twig') }}
                 </div>
             {% endblock %}
@@ -209,21 +215,15 @@
             $('form').preventDoubleSubmission();
 
             $('.btn-show-form').on('click', function (event) {
-                console.log(this);
                 event.stopPropagation();
-                if ($(this).is('.box-login')) {
-                    $('.box-register').not('a').slideUp('medium', function () {
-                        $('.box-login').not('a').slideDown('medium', function () {
-                            $('.box-login form input:first').focus();
-                        });
-                    });
-                } else {
-                    $('.box-login').not('a').slideUp('medium', function () {
-                        $('.box-register').not('a').slideDown('medium', function () {
-                            $('.box-register form input:first').focus();
-                        });
-                    });
+
+                if ($(this).is('a')) {
+                    var button = $(this).is('.box-login') ? 'box-login' : 'box-register';
+                    history.pushState({'button': button}, '', $(this).attr('href'));
                 }
+
+                showBoxes(this);
+
                 return false;
             });
 
@@ -233,5 +233,32 @@
                 }
             });
         });
+
+        function showBoxes(element) {
+            if ($(element).is('.box-login')) {
+                $('.box-register').not('a').slideUp('medium', function () {
+                    $('.box-login').not('a').slideDown('medium', function () {
+                        $('.box-login form input:first').focus();
+                    });
+                });
+            } else {
+                $('.box-login').not('a').slideUp('medium', function () {
+                    $('.box-register').not('a').slideDown('medium', function () {
+                        $('.box-register form input:first').focus();
+                    });
+                });
+            }
+        }
+
+        window.onpopstate = function (event) {
+            if ($(window).width() >= 768) {
+                return;
+            }
+            if (event.state) {
+                showBoxes($("a." + event.state.button));
+            } else {
+                $('.box-register').not('a').slideUp('medium');
+            }
+        };
     </script>
 {% endblock %}
