@@ -87,6 +87,7 @@ assetic:
       lc_login_register_css:
         inputs:
           - 'bundles/logincidadaocore/css/login_register/*.css'
+          - 'bundles/procergslogincidadaocore/css/login_register/*.css'
       lc_base_css:
         inputs:
           - '@bootstrap_css'
@@ -101,7 +102,6 @@ assetic:
           - '@lc_base_css'
           - 'bundles/logincidadaocore/css/logged/logged.css'
           - 'bundles/logincidadaonotification/css/notifications.css'
-
     filters:
         cssrewrite: ~
         uglifyjs2:
